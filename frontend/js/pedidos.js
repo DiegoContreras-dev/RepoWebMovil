@@ -51,11 +51,15 @@ function renderPedidos() {
   listaPedidos.innerHTML = "";
 
   pedidos.forEach((pedido) => {
-    // TODO: usar pedido.itemsDetalle para construir el detalle visual
-    // Cada item debe mostrar:
-    // nombre del plato, cantidad y subtotal
+    let detalleHTML = "";
 
-    const detalle = ""; // TODO: reemplazar por el HTML de los items
+    if (!pedido.itemsDetalle || pedido.itemsDetalle.length === 0) {
+      detalleHTML = "<li>Sin items</li>";
+    } else {
+      pedido.itemsDetalle.forEach((item) => {
+        detalleHTML += `<li>${item.nombre} x ${item.cantidad} - Subtotal: $${item.subtotal}</li>`;
+      });
+    }
 
     listaPedidos.innerHTML += `
       <div class="card">
@@ -64,10 +68,10 @@ function renderPedidos() {
 
         Items:
         <ul>
-          ${detalle}
+          ${detalleHTML}
         </ul>
 
-        Total: $//TODO: mostrar total
+        Total: $${pedido.total}
 
         <button type="button" class="eliminar-pedido" data-id="${pedido.id}">
           Eliminar historial

@@ -9,21 +9,21 @@ const {
 
 function obtenerPedidos(req, res) {
   const pedidosConDetalle = store.pedidos.map((pedido) => {
-    // TODO: completar itemsDetalle
-
     const itemsDetalle = pedido.items.map((item) => {
-      const plato = {}; // = Obtener plato con buscarPlato
+      const plato = buscarPlato(item.platoId);
+      const nombre = plato ? plato.nombre : "Plato eliminado";
+      const precio = plato ? plato.precio : 0;
+      const subtotal = precio * item.cantidad;
 
       return {
-
-        //nombre: plato ? plato.nombre : "Plato eliminado",
+        platoId: item.platoId,
+        nombre: nombre,
         cantidad: item.cantidad,
-        subtotal: 0 // TODO: calcular precio del plato * cantidad
+        subtotal: subtotal
       };
     });
 
-    // TODO: calcular el total sumando los subtotales
-    const total = 0;
+    const total = itemsDetalle.reduce((suma, item) => suma + item.subtotal, 0);
 
     return {
       id: pedido.id,

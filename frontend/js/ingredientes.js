@@ -102,11 +102,20 @@ form.addEventListener("submit", async (event) => {
   const nombre = document.getElementById("ingredienteNombre").value;
   const stock = document.getElementById("ingredienteStock").value;
 
-  // TODO: validar nombre
-  // TODO: validar stock numérico
-  // TODO: validar stock >= 0
+  if (!nombre || nombre.trim() === "") {
+    mostrarMensaje("El nombre no puede estar vacío", "error");
+    return;
+  }
 
-  // Si hay error → mostrarMensaje("...", "error") y hacer return;
+  if (stock === "" || isNaN(Number(stock))) {
+    mostrarMensaje("El stock debe ser un número", "error");
+    return;
+  }
+
+  if (Number(stock) < 0) {
+    mostrarMensaje("El stock no puede ser menor que 0", "error");
+    return;
+  }
 
   const payload = {
     nombre: nombre,
@@ -114,18 +123,18 @@ form.addEventListener("submit", async (event) => {
   };
 
   try {
-    if (id) { //Si hay id, se actualiza. Si no, se crea uno nuevo, use await
-      //TODO: Actualizar
+    if (id) {
+      await actualizarIngrediente(id, payload);
       mostrarMensaje("Ingrediente actualizado correctamente", "ok");
     } else {
-      //TODO: Crear
+      await crearIngrediente(payload);
       mostrarMensaje("Ingrediente creado correctamente", "ok");
     }
 
-    //TODO: limpiar formulario, llamando al método reset() del objeto form o limpiando cada campo manualmente
+    form.reset();
     document.getElementById("ingredienteId").value = "";
 
-    //TODO: recargar ingredientes
+    await cargarIngredientes();
   } catch (error) {
     mostrarMensaje(error.message, "error");
   }

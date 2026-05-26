@@ -31,6 +31,7 @@ function obtenerDashboard(req, res) {
         }
 
         //TODO: Sumar la cantidad de ingrediente necesaria para el plato multiplicada por la cantidad del item
+        ingredientesConsumidos[nombre] += ingredientePlato.cantidad * item.cantidad;
       }
     }
   }

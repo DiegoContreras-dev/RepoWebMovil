@@ -27,7 +27,7 @@ async function cargarDashboard() {
     contenedor.innerHTML = `
       <div class="card">
         <h3>Pedidos realizados</h3>
-        <!--TODO: mostrar cantidad de pedidos -->
+        <p>${data.cantidadPedidos}</p>
       </div>
 
       <div class="card">
@@ -36,8 +36,8 @@ async function cargarDashboard() {
       </div>
 
       <div class="card">
-        <h3>Ingredientes consumidos (FALTA)</h3>
-        <!--TODO: mostrar ingredientes consumidos usando la función objetoALista() -->
+        <h3>Ingredientes consumidos</h3>
+        ${objetoALista(data.ingredientesConsumidos)}
       </div>
     `;
   } catch (errorActual) {

@@ -8,25 +8,29 @@ function obtenerIngredientes(req, res) {
 function crearIngrediente(req, res) {
 
   const { nombre, stock } = req.body;
-  
-  // TODO: validar nombre
-  // TODO: validar stock numérico
-  // TODO: validar stock >= 0
 
-  // En caso de error usar:
-  // return res.status(400).json({ mensaje: "..." });
+  if (!nombre || nombre.trim() === "") {
+    return res.status(400).json({ mensaje: "El nombre no puede estar vacío" });
+  }
+
+  if (stock === undefined || stock === null || stock === "" || isNaN(Number(stock))) {
+    return res.status(400).json({ mensaje: "El stock debe ser un número" });
+  }
+
+  if (Number(stock) < 0) {
+    return res.status(400).json({ mensaje: "El stock no puede ser menor que 0" });
+  }
 
   const nuevoIngrediente = {
     id: store.nextIngredienteId++,
-    nombre: nombre,
+    nombre: nombre.trim(),
     stock: Number(stock)
   };
 
   store.ingredientes.push(nuevoIngrediente);
   res.status(201).json({
-    ingrediente: nuevoIngrediente,
-
-    
+    mensaje: "Ingrediente creado correctamente",
+    ingrediente: nuevoIngrediente
   });
 }
 
