@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Platos - Restaurante Simple</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <h1>Restaurante Simple</h1>
+
+  <nav>
+    <!--TODO: Agregar dashboard-->
+    <button type="button" onclick="window.location.href='ingredientes.html'">Ingredientes</button>
+    <button type="button" onclick="window.location.href='platos.html'">Platos</button>
+    <button type="button" onclick="window.location.href='pedidos.html'">Pedidos</button>
+  </nav>
+
+  <main>
+    <section id="tab-platos" class="tab">
+      <h2>Platos</h2>
+
+      <form id="formPlato">
+        <input type="hidden" id="platoId">
+        <input id="platoNombre" placeholder="Nombre del plato" required>
+        <input id="platoPrecio" type="number" placeholder="Precio" required>
+
+        <h3>Ingredientes del plato</h3>
+        <div id="ingredientesParaPlato"></div>
+
+        <button type="submit">Guardar plato</button>
+      </form>
+
+      <p id="mensajePlato"></p>
+      <div id="listaPlatos"></div>
+    </section>
+  </main>
+
+  <script type="module" src="../js/platos.js"></script>
+</body>
+</html>

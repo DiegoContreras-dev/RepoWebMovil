@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ingredientes - Restaurante Simple</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <h1>Restaurante Simple</h1>
+
+  <nav>
+    <!--TODO: Agregar dashboard-->
+    <button type="button" onclick="window.location.href='ingredientes.html'">Ingredientes</button>
+    <button type="button" onclick="window.location.href='platos.html'">Platos</button>
+    <button type="button" onclick="window.location.href='pedidos.html'">Pedidos</button>
+  </nav>
+
+  <main>
+    <section id="tab-ingredientes" class="tab">
+      <h2>Ingredientes</h2>
+
+      <div class="card">
+        <h3>Crear o editar ingrediente</h3>
+
+        <form id="formIngrediente">
+          <input type="hidden" id="ingredienteId">
+
+          <label for="ingredienteNombre">Nombre</label><br>
+          <input id="ingredienteNombre" placeholder="Nombre" required><br>
+
+          <label for="ingredienteStock">Stock</label><br>
+          <input id="ingredienteStock" type="number" placeholder="Stock" required><br>
+
+          <button type="submit">Guardar ingrediente</button>
+        </form>
+      </div>
+
+      <p id="mensajeIngrediente"></p>
+      <div id="listaIngredientes"></div>
+    </section>
+  </main>
+
+  <script type="module" src="../js/ingredientes.js"></script>
+</body>
+</html>
